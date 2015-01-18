@@ -1,0 +1,8 @@
+digraph {
+	A[stream="array",list="1,2,3,4"];
+	B[stream="adder",amount="100"];
+	C[stream="stdout",prefix="Output:"];
+
+	A -> B -> C;
+	A -> C;
+}
