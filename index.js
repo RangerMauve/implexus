@@ -15,7 +15,7 @@ exports.build = function build(modules, graph, cb) {
 }
 
 function link_streams(graph, stream_map) {
-	Object.keys(streams)
+	Object.keys(stream_map)
 		.forEach(par(link_successors, graph, stream_map));
 
 	return stream_map;
@@ -29,7 +29,7 @@ function build_streams(modules, graph, cb) {
 }
 
 function build_stream(modules, name, node, cb) {
-	var type = node.type;
+	var type = node.stream;
 	var builder = modules[type];
 	if (!builder)
 		return cb(new Error("Stream type " + type + " does not exist for" + name), null);
@@ -53,7 +53,7 @@ function link_successors(graph, stream_map, from) {
 	var from_stream = stream_map[from];
 	outbound
 		.map(par(get_stream, stream_map))
-		.forEach(par(pipe_together, from));
+		.forEach(par(pipe_together, from_stream));
 }
 
 function pipe_together(from, to) {
@@ -61,5 +61,5 @@ function pipe_together(from, to) {
 }
 
 function get_stream(stream_map, name) {
-	return (stream_map[name])
+	return stream_map[name];
 }
