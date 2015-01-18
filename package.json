@@ -1,0 +1,31 @@
+{
+  "name": "implexus-core",
+  "version": "1.0.0",
+  "description": "Takes in a graph describing streams, and builds up the pipeline",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RangerMauve/implexus-core.git"
+  },
+  "keywords": [
+    "graph",
+    "stream",
+    "nodes",
+    "pipeline",
+    "pipe",
+    "reactive"
+  ],
+  "author": "rangermauve",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerMauve/implexus-core/issues"
+  },
+  "homepage": "https://github.com/RangerMauve/implexus-core",
+  "dependencies": {
+    "map-async": "^0.1.1",
+    "par": "^0.3.0"
+  }
+}
