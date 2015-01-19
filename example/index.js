@@ -1,10 +1,10 @@
 var implexus = require("../");
 var dot = require("graphlib-dot");
 var fs = require("fs");
-var util = require("util")
+var util = require("util");
 
 var modules = {
-	array: function(naame, node, cb) {
+	array: function(name, node, cb) {
 		var but = require("but");
 		var streamArray = require("stream-array");
 		var source = (node.list || "")
@@ -30,7 +30,7 @@ var modules = {
 		var time = parseInt(node.time) || 1000;
 		cb(null, interval(time));
 	}
-}
+};
 
 var graph_src = fs.readFileSync(__dirname + "/graph.dot", "utf8");
 var graph = dot.read(graph_src);
