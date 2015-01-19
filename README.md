@@ -1,3 +1,4 @@
+![Logo](https://rawgit.com/RangerMauve/implexus-logo/master/logo.svg)
 implexus-core
 =============
 
