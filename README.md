@@ -14,7 +14,7 @@ Example
 
 Given a graph that looks like this:
 
-![Graph visualization](./example/graph.svg)
+![Graph visualization](./example/graph.png)
 
 ```dot
 digraph {
