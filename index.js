@@ -1,11 +1,13 @@
 var map = require("map-async");
 var par = require("par");
 
-exports.build = function build(modules, graph, cb) {
+exports.build = build;
+
+function build(modules, graph, cb) {
 	build_streams(modules, graph, function(err, stream_map) {
 		if (err) return cb(err);
 		try {
-			link_streams(graph, stream_map)
+			link_streams(graph, stream_map);
 		} catch (e) {
 			cb(e);
 			return;

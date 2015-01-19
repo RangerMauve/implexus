@@ -32,7 +32,7 @@ And some stream factories that look like
 
 ```javascript
 var modules = {
-	array: function(naame, node, cb) {
+	array: function(name, node, cb) {
 		var but = require("but");
 		var streamArray = require("stream-array");
 		var source = (node.list || "")
