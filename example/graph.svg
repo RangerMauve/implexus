@@ -1,0 +1,47 @@
+<svg viewbox="0 0 61.5 104">
+	<style type="text/css">
+		polyline {
+			stroke: black;
+			stroke-linejoin: bevel;
+			stroke-width: 1;
+			fill: none;
+			marker-end: url(#Triangle);
+		}
+		rect {
+			fill: none;
+			stroke: black;
+		}
+		text {
+			font-size: 6px;
+			text-anchor: middle;
+			alignment-baseline: central;
+		}
+	</style>
+
+	<!-- The trianngles at the ends of the edges -->
+	<defs>
+		<marker id="Triangle" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+			<path d="M 0 0 L 10 5 L 0 10 z" />
+	</defs>
+
+	<!-- The edges between the nodes -->
+	<polyline points="30.75,22 22,32 22,42 " />
+	<polyline points="22,62 22,72 30.75,82 " />
+	<polyline points="48.25,22 57,32 57,52 57,72 48.25,82 " />
+
+	<!-- The containers for the nodes -->
+	<g transform="translate(-20,-10)">
+		<rect x="39.5" y="12" width="40" height="20" />
+	</g>
+	<g transform="translate(-20,-10)">
+		<rect x="22" y="52" width="40" height="20" />
+	</g>
+	<g transform="translate(-20,-10)">
+		<rect x="39.5" y="92" width="40" height="20" />
+	</g>
+
+	<!-- The labels for the nodes -->
+	<text x="39.5" y="12">A</text>
+	<text x="22" y="52">B</text>
+	<text x="39.5" y="92">C</text>
+</svg>
