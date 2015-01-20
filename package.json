@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "but": "^2.0.1",
+    "graphlib": "^1.0.1",
     "graphlib-dot": "^0.6.1",
     "interval-stream": "^0.2.0",
     "mocha": "^2.1.0",

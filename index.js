@@ -26,11 +26,11 @@ function link_streams(graph, stream_map) {
 function build_streams(modules, graph, cb) {
 	var node_map = build_node_map(graph);
 	map(node_map, function(node, name, cb) {
-		build_stream(modules, node, cb);
+		build_stream(modules, node, name, cb);
 	}, cb);
 }
 
-function build_stream(modules, node, cb) {
+function build_stream(modules, node, name, cb) {
 	var type = node.stream;
 	var builder = modules[type];
 	if (!builder)

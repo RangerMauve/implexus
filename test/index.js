@@ -1,4 +1,5 @@
 var assert = require("assert");
+var Graph = require("graphlib").Graph;
 var dot = require("graphlib-dot");
 var fs = require("fs");
 var util = require("util");
@@ -44,6 +45,15 @@ describe('implexus-core', function() {
 		collected = [];
 		done();
 	});
+
+  it('errors when invalid stream type referenced', function(done) {
+    var graph = new Graph();
+    graph.setNode('a', {stream: 'mising'});
+    implexus.build({}, graph, function(err) {
+      assert(err, 'expected error');
+      done();
+		});
+  });
 
 	it('supports stream construction of graph with a single node', function(done) {
 		var graph = loadGraph('single-node');
