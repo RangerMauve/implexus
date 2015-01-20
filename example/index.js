@@ -24,11 +24,6 @@ var modules = {
 		cb(null, map(function(number) {
 			return number + amount;
 		}));
-	},
-	interval: function(node, cb) {
-		var interval = require("interval-stream");
-		var time = parseInt(node.time) || 1000;
-		cb(null, interval(time));
 	}
 };
 

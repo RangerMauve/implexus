@@ -1,11 +1,11 @@
-![Logo](https://rawgit.com/RangerMauve/implexus-logo/master/logo.svg)
 implexus-core
 =============
 
+![Logo](https://rawgit.com/RangerMauve/implexus-logo/master/logo.svg)
+
 Takes in a graph describing streams, and builds up the pipeline
 
-
-[![build status](https://secure.travis-ci.org/RangerMauve/implexus-core.png)](http://travis-ci.org/RangerMauve/implexus-core)
+[![NPM](https://nodei.co/npm/implexus-core.png)](https://nodei.co/npm/implexus-core/)[![build status](https://secure.travis-ci.org/RangerMauve/implexus-core.png)](http://travis-ci.org/RangerMauve/implexus-core)
 
 ```
 npm install --save implexus-core
@@ -18,50 +18,45 @@ Example
 
 Given a graph that looks like this:
 
-![Graph visualization](./example/graph.png)
+![Graph visualization](https://rawgit.com/RangerMauve/implexus-core/master/example/graph.svg)
 
 ```dot
 digraph {
-	A[stream="array",list="1,2,3,4"];
-	B[stream="adder",amount="100"];
-	C[stream="stdout",prefix="Output:"];
+  A[stream="array",list="1,2,3,4"];
+  B[stream="adder",amount="100"];
+  C[stream="stdout",prefix="Output:"];
 
-	A -> B -> C;
-	A -> C;
+  A -> B -> C;
+  A -> C;
 }
 ```
 
-And some stream factories that look like
+And some stream factories that look like:
 
 ```javascript
 var modules = {
-	array: function(name, node, cb) {
+	array: function(node, cb) {
 		var but = require("but");
 		var streamArray = require("stream-array");
 		var source = (node.list || "")
-			.split(",")
-			.map(but(parseInt));
+		.split(",")
+		.map(but(parseInt));
 		var stream = streamArray(source);
 		cb(null, stream);
 	},
-	stdout: function(name, node, cb) {
+	stdout: function(node, cb) {
 		var stdout = require("stdout");
 		var prefix = node.prefix || "";
 		cb(null, stdout(prefix));
 	},
-	adder: function(name, node, cb) {
+	adder: function(node, cb) {
 		var map = require("through2-map").obj;
 		var amount = parseInt(node.amount) || 1;
 		cb(null, map(function(number) {
 			return number + amount;
 		}));
-	},
-	interval: function(name, node, cb) {
-		var interval = require("interval-stream");
-		var time = parseInt(node.time) || 1000;
-		cb(null, interval(time));
 	}
-}
+};
 ```
 
 With a bit more code, we can wire it all up together!
@@ -106,4 +101,7 @@ This is what the format for the stream factories. It's supposed to take in the d
 
 -	`name` `String` : The name of the node in the graph
 -	`node` `Object` : The node with properties for describing it
--	`cb` `Function(err,stream)` : This should get called with either an error object, or the resulting stream instance
+-	`cb` : This should get called with either an error object, or match one of the following
+	-	`Function(err,stream)` : Usually the factory should resolve in a stream, which will be used in the graph
+	-	`Function(err, fn(chunk, [encoding]))` : Alternately, it can return a function that takes in data and an encoding, which gets passed to [through2-map](https://www.npmjs.com/package/through2-map) to make a stream
+	-	`Function(err, fn(chunk, encoding, callback))` : Same as above, but async, and gets passed into [through2](https://www.npmjs.com/package/through2) to make a stream.
