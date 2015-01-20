@@ -1,6 +1,6 @@
 {
   "name": "implexus-core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Takes in a graph describing streams, and builds up the pipeline",
   "main": "index.js",
   "scripts": {

@@ -26,17 +26,17 @@ function link_streams(graph, stream_map) {
 function build_streams(modules, graph, cb) {
 	var node_map = build_node_map(graph);
 	map(node_map, function(node, name, cb) {
-		build_stream(modules, name, node, cb);
+		build_stream(modules, node, cb);
 	}, cb);
 }
 
-function build_stream(modules, name, node, cb) {
+function build_stream(modules, node, cb) {
 	var type = node.stream;
 	var builder = modules[type];
 	if (!builder)
 		return cb(new Error("Stream type " + type + " does not exist for" + name), null);
 	try {
-		builder(name, node, cb);
+		builder(node, cb);
 	} catch (e) {
 		cb(e);
 	}

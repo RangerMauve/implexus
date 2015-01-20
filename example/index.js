@@ -4,7 +4,7 @@ var fs = require("fs");
 var util = require("util");
 
 var modules = {
-	array: function(name, node, cb) {
+	array: function(node, cb) {
 		var but = require("but");
 		var streamArray = require("stream-array");
 		var source = (node.list || "")
@@ -13,19 +13,19 @@ var modules = {
 		var stream = streamArray(source);
 		cb(null, stream);
 	},
-	stdout: function(name, node, cb) {
+	stdout: function(node, cb) {
 		var stdout = require("stdout");
 		var prefix = node.prefix || "";
 		cb(null, stdout(prefix));
 	},
-	adder: function(name, node, cb) {
+	adder: function(node, cb) {
 		var map = require("through2-map").obj;
 		var amount = parseInt(node.amount) || 1;
 		cb(null, map(function(number) {
 			return number + amount;
 		}));
 	},
-	interval: function(name, node, cb) {
+	interval: function(node, cb) {
 		var interval = require("interval-stream");
 		var time = parseInt(node.time) || 1000;
 		cb(null, interval(time));
