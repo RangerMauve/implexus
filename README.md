@@ -4,6 +4,9 @@ implexus-core
 
 Takes in a graph describing streams, and builds up the pipeline
 
+
+[![build status](https://secure.travis-ci.org/RangerMauve/implexus-core.png)](http://travis-ci.org/RangerMauve/implexus-core)
+
 ```
 npm install --save implexus-core
 ```

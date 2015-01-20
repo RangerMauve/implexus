@@ -1,0 +1,7 @@
+digraph {
+    dec[stream="decrement"];
+    collect[stream="collect"];
+
+    dec -> collect;
+    dec -> dec;
+}

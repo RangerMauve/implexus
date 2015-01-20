@@ -4,7 +4,7 @@
   "description": "Takes in a graph describing streams, and builds up the pipeline",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,10 @@
     "but": "^2.0.1",
     "graphlib-dot": "^0.6.1",
     "interval-stream": "^0.2.0",
+    "mocha": "^2.1.0",
     "stdout": "0.0.3",
     "stream-array": "^1.0.1",
+    "through2": "^0.6.3",
     "through2-map": "^1.4.0"
   }
 }
