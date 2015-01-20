@@ -3,6 +3,8 @@ var isObject = require("isobject");
 var mapObject = require("map-object");
 var builder = require("./builder.js");
 
+exports.Implexus = Implexus;
+
 function Implexus() {
 	if (!(this instanceof Implexus))
 		return new Implexus();
