@@ -27,7 +27,7 @@ var modules = {
 
   decrement: function(name, node, cb) {
     cb(null, through2(function(number, enc, cb) {
-      if (count === 0) {
+      if (number === 0) {
         this.end();
         return cb();
       }
