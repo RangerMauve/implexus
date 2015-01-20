@@ -1,0 +1,8 @@
+digraph {
+    start[stream="collect"]
+    dec[stream="decrement"]
+    collect[stream="collect"]
+
+    start -> dec -> collect
+    dec -> dec
+}
