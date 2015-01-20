@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/RangerMauve/implexus-core",
   "dependencies": {
-    "graphlib-dot": "^0.6.1",
+    "graphlib": "^1.0.1",
     "is-function": "^1.0.1",
     "isobject": "^0.2.0",
     "map-async": "^0.1.1",
@@ -36,6 +36,7 @@
     "x-is-string": "^0.1.0"
   },
   "devDependencies": {
+    "graphlib-dot": "^0.6.1",
     "but": "^2.0.1",
     "interval-stream": "^0.2.0",
     "mocha": "^2.1.0",

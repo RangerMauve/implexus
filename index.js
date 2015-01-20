@@ -6,7 +6,7 @@ var dot = require("graphlib-dot");
 
 var builder = require("./builder.js");
 
-exports.Implexus = Implexus;
+module.exports = Implexus;
 
 function Implexus() {
 	if (!(this instanceof Implexus))
@@ -37,6 +37,7 @@ function define(type, factory) {
 		this.modules[type] = factory;
 		return this;
 	}
+
 	throw new Error("Invalid factory type: " + factory);
 }
 
