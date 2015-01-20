@@ -25,8 +25,12 @@
   },
   "homepage": "https://github.com/RangerMauve/implexus-core",
   "dependencies": {
+    "is-function": "^1.0.1",
+    "isobject": "^0.2.0",
     "map-async": "^0.1.1",
-    "par": "^0.3.0"
+    "par": "^0.3.0",
+    "through2": "^0.6.3",
+    "through2-map": "^1.4.0"
   },
   "devDependencies": {
     "but": "^2.0.1",

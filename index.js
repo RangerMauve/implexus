@@ -1,5 +1,9 @@
 var map = require("map-async");
 var par = require("par");
+var isFunction = require("is-function");
+var isObject = require("isobject");
+var through = require("through2");
+var throughMap = require("through2-map");
 
 exports.build = build;
 
@@ -36,7 +40,7 @@ function build_stream(modules, node, cb) {
 	if (!builder)
 		return cb(new Error("Stream type " + type + " does not exist for" + name), null);
 	try {
-		builder(node, cb);
+		run_builder(builder, node, cb);
 	} catch (e) {
 		cb(e);
 	}
@@ -56,6 +60,30 @@ function link_successors(graph, stream_map, from) {
 	outbound
 		.map(par(get_stream, stream_map))
 		.forEach(par(pipe_together, from_stream));
+}
+
+function run_builder(builder, node, cb) {
+	builder(node, function(err, result) {
+		console.log("Builder result", err, result);
+		if (err) return cb(err, null);
+		get_stream_from_builder(result, cb);
+	});
+}
+
+function get_stream_from_builder(result, cb) {
+	if (isFunction(result)) {
+		// Only registers (chunk,encoding)
+		if (result.length <= 2) {
+			cb(null, throughMap(result));
+		} else {
+			cb(null, through2(result));
+		}
+	} else if (isObject(result)) {
+		// TODO: Actually check to see if it's a stream
+		cb(null, result); // Probably a stream
+	} else {
+		cb(new Error("Factory returned an invalid type"));
+	}
 }
 
 function pipe_together(from, to) {
