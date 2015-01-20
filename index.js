@@ -1,6 +1,9 @@
 var isFunction = require("is-function");
 var isObject = require("isobject");
+var isString = require("x-is-string");
 var mapObject = require("map-object");
+var dot = require("graphlib-dot");
+
 var builder = require("./builder.js");
 
 exports.Implexus = Implexus;
@@ -38,9 +41,14 @@ function define(type, factory) {
 }
 
 function defineAll(self, object) {
-	mapObject.lv(object, self.use, self);
+	mapObject.kv(object, define, self);
 }
 
 function build(graph, cb) {
-	implexusCore.buil(this.modules, graph, cb);
+	if (isString(graph))
+		graph = dot.read(graph);
+	else if (!isObject(graph))
+		return cb(new Error("Invalid graph type"));
+
+	builder.build(this.modules, graph, cb);
 }
