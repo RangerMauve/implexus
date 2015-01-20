@@ -6,7 +6,7 @@ var Writable = require('stream').Writable;
 var through = require('through2').obj;
 var Graph = require("graphlib").Graph;
 
-var implexus = require("../");
+var Implexus = require("../");
 
 var collected;
 
@@ -35,15 +35,20 @@ var modules = {
 };
 
 describe('implexus-core', function() {
+  var implexus;
+
 	beforeEach(function(done) {
 		collected = [];
+    implexus = new Implexus();
 		done();
 	});
 
   it('errors when invalid stream type referenced', function(done) {
     var graph = new Graph();
+
 		graph.setNode('a', {stream: 'missing'});
-		implexus.build({}, graph, function(err) {
+
+		implexus.build(graph, function(err) {
 			assert(err, 'expected error');
 			done();
 		});
@@ -52,8 +57,10 @@ describe('implexus-core', function() {
 	it('supports stream construction of graph with a single node', function(done) {
 		var graph = new Graph();
 		graph.setNode('start', {stream: 'collect'});
+    
+    implexus.define(modules);
 
-		implexus.build(modules, graph, function(err, streamMap) {
+		implexus.build(graph, function(err, streamMap) {
 			assert(!err, err);
 
 			var start = streamMap.start;
@@ -76,7 +83,9 @@ describe('implexus-core', function() {
 		graph.setEdge('dec', 'collect');
 		graph.setEdge('dec', 'dec');
 
-		implexus.build(modules, graph, function(err, streamMap) {
+    implexus.define(modules);
+
+		implexus.build(graph, function(err, streamMap) {
 			assert(!err, err);
 
 			var start = streamMap.dec;

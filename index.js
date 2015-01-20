@@ -6,7 +6,7 @@ var dot = require("graphlib-dot");
 
 var builder = require("./builder.js");
 
-exports.Implexus = Implexus;
+module.exports = Implexus;
 
 function Implexus() {
 	if (!(this instanceof Implexus))
