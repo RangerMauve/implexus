@@ -1,5 +1,5 @@
 {
-  "name": "implexus-core",
+  "name": "implexus",
   "version": "1.2.0",
   "description": "Takes in a graph describing streams, and builds up the pipeline",
   "main": "index.js",
