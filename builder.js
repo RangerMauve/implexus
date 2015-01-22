@@ -37,7 +37,7 @@ function build_streams(modules, graph, cb) {
 }
 
 function build_stream(modules, node, name, cb) {
-	var type = node.stream;
+	var type = node.type;
 	var builder = modules[type];
 	if (!builder)
 		return cb(new Error("Stream type " + type + " does not exist for" + name), null);
