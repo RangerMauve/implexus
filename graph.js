@@ -9,7 +9,12 @@ function ImplexusGraph(streams) {
 ImplexusGraph.prototype = {
 	constructor: ImplexusGraph,
 	streams: null,
-	destroy: destroy
+	destroy: destroy,
+	node: node
+}
+
+function node(name){
+	return this.streams[name];
 }
 
 function destroy(cb) {
