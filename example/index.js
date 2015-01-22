@@ -1,4 +1,4 @@
-var Implexus = require("../").Implexus;
+var Implexus = require("../");
 var fs = require("fs");
 var util = require("util");
 
@@ -31,10 +31,7 @@ implexus.define({
 	}
 });
 
-implexus.build(graph, function(err, streams) {
-	var opts = {
-		depth: 0
-	};
-	if (err) console.log(err, err.stack);
-	else console.log("Stream map:", util.inspect(streams, opts));
+implexus.build(graph, function(err, graph) {
+	if (err) return console.log(err, err.stack);
+	console.log("Stream map:", graph);
 });
