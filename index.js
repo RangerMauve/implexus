@@ -52,6 +52,6 @@ function build(graph, cb) {
 		return cb(new Error("Invalid graph type"));
 
 	builder.build(this.modules, graph, cb);
-	
+
 	return this;
 }

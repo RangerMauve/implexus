@@ -11,9 +11,9 @@ ImplexusGraph.prototype = {
 	streams: null,
 	destroy: destroy,
 	node: node
-}
+};
 
-function node(name){
+function node(name) {
 	return this.streams[name];
 }
 

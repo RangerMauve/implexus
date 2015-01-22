@@ -4,11 +4,12 @@
   "description": "Takes in a graph describing streams, and builds up the pipeline",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "format": "find . -name '*.js' -not -path './node_modules/*' | xargs node_modules/js-beautify/js/bin/js-beautify.js --replace"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RangerMauve/implexus-core.git"
+    "url": "https://github.com/RangerMauve/implexus.git"
   },
   "keywords": [
     "graph",
@@ -21,9 +22,9 @@
   "author": "rangermauve",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RangerMauve/implexus-core/issues"
+    "url": "https://github.com/RangerMauve/implexus/issues"
   },
-  "homepage": "https://github.com/RangerMauve/implexus-core",
+  "homepage": "https://github.com/RangerMauve/implexus",
   "dependencies": {
     "graphlib": "^1.0.1",
     "is-function": "^1.0.1",
@@ -36,9 +37,10 @@
     "x-is-string": "^0.1.0"
   },
   "devDependencies": {
-    "graphlib-dot": "^0.6.1",
     "but": "^2.0.1",
+    "graphlib-dot": "^0.6.1",
     "interval-stream": "^0.2.0",
+    "js-beautify": "^1.5.4",
     "mocha": "^2.1.0",
     "stdout": "0.0.3",
     "stream-array": "^1.0.1"

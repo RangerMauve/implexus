@@ -11,8 +11,8 @@ var Implexus = require("../");
 var collected;
 
 var modules = {
-	collect: function(node, cb) {
-		cb(null, through(function(chunk, enc, cb) {
+	collect: function (node, cb) {
+		cb(null, through(function (chunk, enc, cb) {
 			if (!chunk) {
 				this.end();
 				return cb();
@@ -22,8 +22,8 @@ var modules = {
 		}));
 	},
 
-	decrement: function(node, cb) {
-		cb(null, through(function(number, enc, cb) {
+	decrement: function (node, cb) {
+		cb(null, through(function (number, enc, cb) {
 			if (number === 0) {
 				this.end();
 				return cb();
@@ -34,39 +34,43 @@ var modules = {
 	},
 };
 
-describe('implexus-core', function() {
-  var implexus;
+describe('implexus-core', function () {
+	var implexus;
 
-	beforeEach(function(done) {
+	beforeEach(function (done) {
 		collected = [];
-    implexus = new Implexus();
+		implexus = new Implexus();
 		done();
 	});
 
-  it('errors when invalid stream type referenced', function(done) {
-    var graph = new Graph();
+	it('errors when invalid stream type referenced', function (done) {
+		var graph = new Graph();
 
-		graph.setNode('a', {stream: 'missing'});
+		graph.setNode('a', {
+			stream: 'missing'
+		});
 
-		implexus.build(graph, function(err) {
+		implexus.build(graph, function (err) {
 			assert(err, 'expected error');
 			done();
 		});
-  });
+	});
 
-	it('supports stream construction of graph with a single node', function(done) {
+	it('supports stream construction of graph with a single node', function (done) {
 		var graph = new Graph();
-		graph.setNode('start', {stream: 'collect'});
-    
-    implexus.define(modules);
+		graph.setNode('start', {
+			stream: 'collect'
+		});
 
-		implexus.build(graph, function(err, streamMap) {
+		implexus.define(modules);
+
+		implexus.build(graph, function (err, streamMap) {
 			assert(!err, err);
 
 			var start = streamMap.start;
 			assert(start instanceof Stream);
 
-			start.on('finish', function() {
+			start.on('finish', function () {
 				assert.deepEqual(collected, ['hello']);
 				done();
 			});
@@ -76,21 +80,25 @@ describe('implexus-core', function() {
 		});
 	});
 
-	it('supports the construction of graphs with cycles', function(done) {
+	it('supports the construction of graphs with cycles', function (done) {
 		var graph = new Graph();
-		graph.setNode('dec', {stream: 'decrement'});
-		graph.setNode('collect', {stream: 'collect'});
+		graph.setNode('dec', {
+			stream: 'decrement'
+		});
+		graph.setNode('collect', {
+			stream: 'collect'
+		});
 		graph.setEdge('dec', 'collect');
 		graph.setEdge('dec', 'dec');
 
-    implexus.define(modules);
+		implexus.define(modules);
 
-		implexus.build(graph, function(err, streamMap) {
+		implexus.build(graph, function (err, streamMap) {
 			assert(!err, err);
 
 			var start = streamMap.dec;
 
-			streamMap.collect.on('finish', function() {
+			streamMap.collect.on('finish', function () {
 				assert.deepEqual(collected, [4, 3, 2, 1]);
 				done();
 			});
