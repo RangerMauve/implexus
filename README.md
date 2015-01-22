@@ -81,3 +81,11 @@ This destroys the created graph of streams. It unpipes all the streams one by on
 ### attributes
 
 -	`cb` `Function(err)` : This callback gets called when the graph has been destroyed, or if there was an error during its destruction.
+
+### `ImplexusGraph#node(name)`
+
+Fetches the stream from the graph by name.
+
+#### attributes
+
+-	`name` `String` : The name of the node to fetch
