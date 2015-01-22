@@ -20,11 +20,11 @@ API
 
 The library has a very small surface to make it super easy to integrate with.
 
-### `Implexus()`
+### `new Implexus()`
 
-Creates a new instance of Implexus.
+Creates a new instance of Implexus. This is the top level export of the module.
 
-### `Implexus.define(type, factory)`
+### `Implexus#define(type, factory)`
 
 Defines a new type of stream that can be used new graphs.
 
@@ -37,7 +37,7 @@ Defines a new type of stream that can be used new graphs.
 
 -	`Implexus` : Returns itself for chaining
 
-### `Implexus.define(modules)`
+### `Implexus#define(modules)`
 
 A bulk version of `Implexus.define(type,factory)`
 
@@ -49,7 +49,7 @@ A bulk version of `Implexus.define(type,factory)`
 
 -	`Implexus` : Returns itself for chaining
 
-### `Implexus.build(graph, cb)`
+### `Implexus#build(graph, cb)`
 
 This parses out the graph, creates streams from the modules, and wires them up.
 
@@ -74,7 +74,7 @@ This is the format for the stream factories. It's supposed to take in the data f
 -	`Function(err, fn(chunk, [encoding]),[cleanup])` : Alternately, it can return a function that takes in data and an encoding, which gets passed to [through2-map](https://www.npmjs.com/package/through2-map) to make a stream
 -	`Function(err, fn(chunk, encoding, callback),[cleanup])` : Same as above, but async, and gets passed into [through2](https://www.npmjs.com/package/through2) to make a stream.
 
-### `ImplexusGraph.destroy(cb)`
+### `ImplexusGraph#destroy(cb)`
 
 This destroys the created graph of streams. It unpipes all the streams one by one, and calls the `cleanup` function if one was made by the stream's `StreamFactory`.
 
